@@ -56,9 +56,7 @@ const CreatePost = () => {
     try {
       setGeneratingImg(true);
 
-      // Make the API request
       const response = await fetch('https://api-inference.huggingface.co/models/stabilityai/stable-diffusion-xl-base-1.0', {
-        // https://api-inference.huggingface.co/models/black-forest-labs/FLUX.1-dev
         method: 'POST',
         headers: {
           'Authorization': 'Bearer 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',
@@ -67,18 +65,16 @@ const CreatePost = () => {
         body: JSON.stringify({ inputs: form.prompt }),
       });
 
-      // Check if the response is successful
       if (!response.ok) {
-        const errorDetails = await response.text(); // Fetch additional error details
+        const errorDetails = await response.text();
         throw new Error(`HTTP Error ${response.status}: ${errorDetails}`);
       }
 
-      // Handle binary response
-      const blob = await response.blob(); // Convert response to a Blob
+      const blob = await response.blob();
       const reader = new FileReader();
 
       reader.onloadend = () => {
-        const base64data = reader.result; // Base64-encoded image
+        const base64data = reader.result;
         setForm({ ...form, photo: base64data });
       };
 
@@ -86,7 +82,7 @@ const CreatePost = () => {
         throw new Error(`Error reading Blob: ${error.message}`);
       };
 
-      reader.readAsDataURL(blob); // Read Blob as a Base64 string
+      reader.readAsDataURL(blob);
     } catch (error) {
       console.error('Error generating image:', error.message);
       console.error('Full error details:', error);
@@ -129,14 +125,6 @@ const CreatePost = () => {
 
       <form className="mt-16 max-w-3xl" onSubmit={handleSubmit}>
         <div className="flex flex-col gap-5">
-          {/* <FormField
-            labelName="Your Name"
-            type="text"
-            name="name"
-            placeholder="Ex. Yash"
-            value={form.name}
-            handleChange={handleChange}
-          /> */}
 
           <FormField
             labelName="Prompt"
