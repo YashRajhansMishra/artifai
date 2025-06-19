@@ -17,11 +17,11 @@ const openai = new OpenAI({
 
 // Test Route
 router.get('/', (req, res) => {
-  res.send('Welcome to dalleRoutes!');
+  res.send('Welcome to getRoutes!');
 });
 
 // Route for generating images
-router.post('/api/v1/dalle', async (req, res) => {
+router.post('/api/v1/get', async (req, res) => {
   try {
     const { prompt } = req.body;
 
