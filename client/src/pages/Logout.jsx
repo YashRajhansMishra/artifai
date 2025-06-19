@@ -1,6 +1,6 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
-import { auth } from '../firebaseConfig'; // Adjust the import according to your project structure
+import { auth } from '../firebaseConfig';
 
 const Logout = () => {
   const navigate = useNavigate();
@@ -9,7 +9,7 @@ const Logout = () => {
     auth.signOut().then(() => {
       navigate('/welcome');
     }).catch((error) => {
-      // An error happened.
+      
       console.error("Error signing out: ", error);
     });
   };
